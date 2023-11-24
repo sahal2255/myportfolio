@@ -422,7 +422,7 @@
               <div class="my-3">
                 <div class="loading">Loading</div>
                 <div class="error-message"></div>
-                <div class="sent-message">Your message has been sent. Thank you!</div>
+                <div class="sent-message ">Your message has been sent. Thank you!</div>
               </div>
               <div class="text-center">
                 <button type="submit" class="btn btn-primary">Submit</button></div>
@@ -476,6 +476,7 @@
             // Validation for name
             if (name === "") {
                 nameError.textContent = "Name is required.";
+                nameError.style.color = "red";
                 isValid = false; // Mark the form as invalid.
             } else if (name.length < 3) {
                 nameError.textContent = "Name must be at least 3 characters.";
@@ -485,6 +486,7 @@
             } // Validation for email
                 if (email === "") {
                     emailError.textContent = "Email is required.";
+                    emailError.style.color = "red";
                     isValid = false; // Mark the form as invalid.
                 } else if (!email.includes(check)) {
                     emailError.textContent = "Email is not valid.";
@@ -496,14 +498,19 @@
                 // Validation for number
                 if (number === "") {
                     numberError.textContent = "Number is required.";
+                    numberError.style.color = "red";
                     isValid = false; // Mark the form as invalid.
-                } else {
+                }else if(number.length !== 10){
+                  numberError.textContent = "Number must be 10 digits.";
+                }
+                 else {
                     numberError.textContent = "";
                 }
     
                 // Validation for message
                 if (msg === "") {
                     msgError.textContent = "Enter a message";
+                    msgError.style.color = "red";
                     isValid = false; // Mark the form as invalid.
                 } else {
                     msgError.textContent = "";
@@ -513,11 +520,12 @@
                 if (isValid) {
                     // You can add code here to submit the form, e.g., via AJAX or by removing the preventDefault and letting the form submit naturally.
                     alert("Form submitted successfully.");
+                    submitFormData();
                     form.reset(); // Reset the form fields after successful submission.
                 }
             });
-        }); 
-    </script>
+       
+    
   
   
   
@@ -528,26 +536,30 @@
       
 
 
+        function submitFormData(){
 
-      <script>
-        $("#submit-form").submit((e)=>{
-            e.preventDefault()
+        
+      
+        // $("#submit-form").submit((e)=>{
+        //     e.preventDefault()
             $.ajax({
                 url:"https://script.google.com/macros/s/AKfycbzzy5HUAQw5QgoUevtJ4_l1yErzXJcW14KGpYz2nW9WChaSdrAHpRi2qaSBCqvzRc9v0g/exec",
                 data:$("#submit-form").serialize(),
                 method:"post",
                 success:function (response){
-                    alert("Form submitted successfully")
-                    window.location.reload()
+                    // alert("Form submitted successfully");
+                    form.reset();
+                    // window.location.reload()
                     // window.location.href="https://google.com"
                     // onsubmit="setTimeout(function () { window.location.reload(); }, 10)"
                 },
                 error:function (err){
                     alert("Something Error")
     
-                }
-            })
-        })
+                },
+            });
+          }
+        });
     </script>
 
 
