@@ -502,6 +502,8 @@
                     isValid = false; // Mark the form as invalid.
                 }else if(number.length !== 10){
                   numberError.textContent = "Number must be 10 digits.";
+                  numberError.style.color="red";
+                  isValid = false;
                 }
                  else {
                     numberError.textContent = "";
